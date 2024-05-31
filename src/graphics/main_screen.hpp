@@ -6,7 +6,9 @@
 
 void setupM5Dial();
 
-void drawMenu(uint8_t selected);
-void drawCursor(uint8_t selected);
+void drawMainMenu(uint8_t main_menu_mode);
+void drawCursor(uint8_t main_menu_mode);
+
+void drawSettingMenu();
 
 #endif
