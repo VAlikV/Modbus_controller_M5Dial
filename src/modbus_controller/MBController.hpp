@@ -3,10 +3,13 @@
 
 #include <Arduino.h>
 #include <M5Dial.h>
+#include "../pictures/pictures_bitmap.hpp"
+#include <SPIFFS.h>
 
 class MBController
 {
 private:
+    uint16_t color_ = 0b1111101111000000; // Темнооранжевый
     bool update_ = true; // Нужно ли обновлять экран
 
     int current_menu_ = 0;      // id текущего меню
@@ -23,8 +26,16 @@ private:
 
     m5::touch_state_t prev_state_;       // Предыдущее состояние сенсора
 
+    File settings_picture_;
+    File play_picture_;
+    File temperature_picture_;
+    File setup_picture_;
+
+    void filesOpen();
+
     void drawCursor();
     void drawMainMenu();
+    void selectAnimation(byte btn);
 
 public:
 

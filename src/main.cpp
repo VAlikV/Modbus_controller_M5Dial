@@ -11,6 +11,6 @@ void loop()
 {
     MBC.updateM5Dial();
     MBC.updateScreen();
-    MBC.checkEncoder();
+    //MBC.checkEncoder();
     MBC.checkTouch();
 }
