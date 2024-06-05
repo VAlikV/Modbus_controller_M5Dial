@@ -180,9 +180,23 @@ void MBController::drawMainMenu()
     M5Dial.Display.fillRect(0, 0, M5Dial.Display.width()/2, M5Dial.Display.height(), BLACK);
     M5Dial.Display.fillRect(0, M5Dial.Display.height()/2, M5Dial.Display.width(), M5Dial.Display.height()/2, BLACK);
 
-    M5Dial.Display.fillRoundRect(0, 0, M5Dial.Display.width()/2 - 5, M5Dial.Display.height()/2 - 5, 10, color_);
-    M5Dial.Display.fillRoundRect(0, M5Dial.Display.height()/2 + 5, M5Dial.Display.width()/2 - 5, M5Dial.Display.height()/2 - 5, 10, color_);
-    M5Dial.Display.fillRoundRect(M5Dial.Display.width()/2 + 5, M5Dial.Display.height()/2 + 5, M5Dial.Display.width()/2 - 5, M5Dial.Display.height()/2 - 5, 10, color_);
+    //M5Dial.Display.
+
+    M5Dial.Display.fillRect(0, 0, M5Dial.Display.width()/2 - 20, M5Dial.Display.height()/2 - 20, color_);
+    M5Dial.Display.fillRoundRect(0, M5Dial.Display.height()/2 - 25, M5Dial.Display.width()/2 - 5, 20, 10, color_);
+    M5Dial.Display.fillRoundRect(M5Dial.Display.width()/2 - 25, 0, 20, M5Dial.Display.height()/2 - 5, 10, color_);
+
+    M5Dial.Display.fillRect(0, M5Dial.Display.height()/2 + 20, M5Dial.Display.width()/2 - 20, M5Dial.Display.height()/2 - 20, color_);
+    M5Dial.Display.fillRoundRect(0, M5Dial.Display.height()/2 + 5, M5Dial.Display.width()/2 - 5, 20, 10, color_);
+    M5Dial.Display.fillRoundRect(M5Dial.Display.width()/2 - 25, M5Dial.Display.height()/2 + 5, 20, M5Dial.Display.height()/2 - 5, 10, color_);
+
+    M5Dial.Display.fillRect(M5Dial.Display.width()/2 + 20, M5Dial.Display.height()/2 + 20, M5Dial.Display.width()/2 - 20, M5Dial.Display.height()/2 - 20, color_);
+    M5Dial.Display.fillRoundRect(M5Dial.Display.width()/2 + 5, M5Dial.Display.height()/2 + 5, M5Dial.Display.width()/2 - 5, 20, 10, color_);
+    M5Dial.Display.fillRoundRect(M5Dial.Display.width()/2 + 5, M5Dial.Display.height()/2 + 5, 20, M5Dial.Display.height()/2 - 5, 10, color_);
+
+    // M5Dial.Display.drawLine(0, M5Dial.Display.height()/2, M5Dial.Display.width(), M5Dial.Display.height()/2, WHITE);
+    // M5Dial.Display.drawLine(M5Dial.Display.width()/2, 0, M5Dial.Display.width()/2, M5Dial.Display.height(), WHITE);
+
     //M5Dial.Display.drawBitmap(38, 28, 60, 60, TEST);
     //M5Dial.Display.drawJpgFile()
     //M5Dial.Display.drawPngFile(temperature_picture_, "/Temperature.png",0,0);
@@ -199,25 +213,51 @@ void MBController::selectAnimation(byte btn)
     {
         case 1:
 
-            // M5Dial.Display.fillRect(0, 0, M5Dial.Display.width()/2, M5Dial.Display.height()/2, BLACK);
-            // M5Dial.Display.fillRoundRect(0, 0, M5Dial.Display.width()/2, M5Dial.Display.height()/2, 10, color_);
-            // M5Dial.Display.drawPng(&temperature_picture_, 38, 38, 100, 100);
+            M5Dial.Display.fillRoundRect(0, M5Dial.Display.height()/2 - 20, M5Dial.Display.width()/2, 20, 10, color_);
+            M5Dial.Display.fillRoundRect(M5Dial.Display.width()/2 - 20, 0, 20, M5Dial.Display.height()/2, 10, color_);
+
             M5Dial.Speaker.tone(8000, 20);
             delay(80);
-            // M5Dial.Display.fillRect(0, 0, M5Dial.Display.width()/2+2, M5Dial.Display.height()/2+2, BLACK);
+
+            M5Dial.Display.fillRect(0, M5Dial.Display.height()/2 - 18, M5Dial.Display.width()/2+2, 22, BLACK);
+            M5Dial.Display.fillRect(M5Dial.Display.width()/2 - 18, 0, 22, M5Dial.Display.height()/2 - 2, BLACK);
+
+            M5Dial.Display.fillRoundRect(0, M5Dial.Display.height()/2 - 25, M5Dial.Display.width()/2 - 5, 20, 10, color_);
+            M5Dial.Display.fillRoundRect(M5Dial.Display.width()/2 - 25, 0, 20, M5Dial.Display.height()/2 - 5, 10, color_);
+
             // M5Dial.Display.fillRoundRect(0, 0, M5Dial.Display.width()/2 - 5, M5Dial.Display.height()/2 - 5, 10, color_);
             // M5Dial.Display.clearFileStorage();
             // M5Dial.Display.drawPng(&temperature_picture_, 38, 38, 100, 100);
             break;
 
         case 2:
-            M5Dial.Speaker.tone(8000, 20);
+
+            M5Dial.Display.fillRoundRect(0, M5Dial.Display.height()/2, M5Dial.Display.width()/2, 20, 10, color_);
+            M5Dial.Display.fillRoundRect(M5Dial.Display.width()/2 - 20, M5Dial.Display.height()/2, 20, M5Dial.Display.height()/2, 10, color_);
+
+            M5Dial.Speaker.tone(7000, 20);
             delay(80);
+
+            M5Dial.Display.fillRect(0, M5Dial.Display.height()/2 - 2, M5Dial.Display.width()/2 + 2, 22, BLACK);
+            M5Dial.Display.fillRect(M5Dial.Display.width()/2 - 18, M5Dial.Display.height()/2 - 2, 22, M5Dial.Display.height()/2+2, BLACK);
+
+            M5Dial.Display.fillRoundRect(0, M5Dial.Display.height()/2 + 5, M5Dial.Display.width()/2 - 5, 20, 10, color_);
+            M5Dial.Display.fillRoundRect(M5Dial.Display.width()/2 - 25, M5Dial.Display.height()/2 + 5, 20, M5Dial.Display.height()/2 - 5, 10, color_);
             break;
 
         case 3:
-            M5Dial.Speaker.tone(8000, 20);
+
+            M5Dial.Display.fillRoundRect(M5Dial.Display.width()/2, M5Dial.Display.height()/2, M5Dial.Display.width()/2, 20, 10, color_);
+            M5Dial.Display.fillRoundRect(M5Dial.Display.width()/2, M5Dial.Display.height()/2, 20, M5Dial.Display.height()/2, 10, color_);
+
+            M5Dial.Speaker.tone(6000, 20);
             delay(80);
+
+            M5Dial.Display.fillRect(M5Dial.Display.width()/2-2, M5Dial.Display.height()/2-2, M5Dial.Display.width()/2+2, 22, BLACK);
+            M5Dial.Display.fillRect(M5Dial.Display.width()/2-2, M5Dial.Display.height()/2-2, 22, M5Dial.Display.height()/2+2, BLACK);
+
+            M5Dial.Display.fillRoundRect(M5Dial.Display.width()/2 + 5, M5Dial.Display.height()/2 + 5, M5Dial.Display.width()/2 - 5, 20, 10, color_);
+            M5Dial.Display.fillRoundRect(M5Dial.Display.width()/2 + 5, M5Dial.Display.height()/2 + 5, 20, M5Dial.Display.height()/2 - 5, 10, color_);
             break;
 
         default:
