@@ -165,6 +165,7 @@ void MBController::drawCursor()
 void MBController::drawMainMenu()
 {
     M5Dial.Display.drawPngFile(SPIFFS, "/Main_Temperature.png", 0, 0);
+    //M5Dial.Display.drawPngFile(SPIFFS, "/Main_Temperature.png", 0, 0, M5Dial.Display.width(), M5Dial.Display.height(), 0, 0, 2, 2);
     M5Dial.Display.drawPngFile(SPIFFS, "/Main_Start.png", 0, 125);
     M5Dial.Display.drawPngFile(SPIFFS, "/Main_Setup.png", 125, 125);
 
@@ -179,29 +180,39 @@ void MBController::selectAnimation(byte btn)
             M5Dial.Display.fillRect(150,80,50,30, BLACK);
             M5Dial.Display.drawString("1", 172, 96);
             M5Dial.Speaker.tone(8000, 20);
-            delay(80);
+            M5Dial.Display.drawPngFile(SPIFFS, "/Main_Temperature.png", 0, 0, M5Dial.Display.width(), M5Dial.Display.height(), 0, 0, 1.0435, 1.0435);
+            delay(30);
             M5Dial.Display.drawPngFile(SPIFFS, "/Main_Cross.png", 0, 0);
+            M5Dial.Display.drawPngFile(SPIFFS, "/Main_Temperature.png", 0, 0);
+
             break;
 
         case 2:
             M5Dial.Display.fillRect(150,80,50,30, BLACK);
             M5Dial.Display.drawString("2", 172, 96);
             M5Dial.Speaker.tone(7000, 20);
-            delay(80);
+            M5Dial.Display.drawPngFile(SPIFFS, "/Main_Start.png", 0, 120, M5Dial.Display.width(), M5Dial.Display.height(), 0, 0, 1.0435, 1.0435);
+            delay(30);
+            M5Dial.Display.drawPngFile(SPIFFS, "/Main_Cross.png", 0, 0);
+            M5Dial.Display.drawPngFile(SPIFFS, "/Main_Start.png", 0, 125);
             break;
 
         case 3:
             M5Dial.Display.fillRect(150,80,50,30, BLACK);
             M5Dial.Display.drawString("3", 172, 96);
             M5Dial.Speaker.tone(6000, 20);
-            delay(80);
+            M5Dial.Display.drawPngFile(SPIFFS, "/Main_Setup.png", 120, 120, M5Dial.Display.width(), M5Dial.Display.height(), 0, 0, 1.0435, 1.0435);
+            delay(30);
+            M5Dial.Display.drawPngFile(SPIFFS, "/Main_Cross.png", 0, 0);
+            M5Dial.Display.drawPngFile(SPIFFS, "/Main_Setup.png", 125, 125);
+
             break;
 
         default:
             M5Dial.Display.fillRect(150,80,50,30, BLACK);
             M5Dial.Display.drawString("...", 172, 96);
             M5Dial.Speaker.tone(4000, 20);
-            delay(80);
+            delay(30);
             break;
     }
 }
