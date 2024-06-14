@@ -116,25 +116,41 @@ void MBController::checkTouch()
     {
         if (state_name_[t.state] == "touch")
         {
-            if ((t.x < M5Dial.Display.width()/2 - 5) && (t.y < M5Dial.Display.height()/2 - 5))
+            switch(current_menu_)
             {
-                selectAnimation(1);
-            }
-            else if ((t.x < M5Dial.Display.width()/2 - 5) && (t.y > M5Dial.Display.height()/2 + 5))
-            {
-                selectAnimation(2);
-            }
-            else if ((t.x > M5Dial.Display.width()/2 + 5) && (t.y > M5Dial.Display.height()/2 + 5))
-            {
-                selectAnimation(3);
-            }
-            else
-            {
-                selectAnimation(0);
+                case 0:
+                    if ((t.x < M5Dial.Display.width()/2 - 5) && (t.y < M5Dial.Display.height()/2 - 5))
+                    {
+                        selectAnimation(1);
+                        update_ = true;
+                        current_menu_ = 1;
+                    }
+                    else if ((t.x < M5Dial.Display.width()/2 - 5) && (t.y > M5Dial.Display.height()/2 + 5))
+                    {
+                        selectAnimation(2);
+                        update_ = true;
+                        current_menu_ = 2;
+                    }
+                    else if ((t.x > M5Dial.Display.width()/2 + 5) && (t.y > M5Dial.Display.height()/2 + 5))
+                    {
+                        selectAnimation(3);
+                        update_ = true;
+                        current_menu_ = 3;
+                    }
+                    else
+                    {
+                        selectAnimation(0);
+                    }
+                    break;
+                case 1:
+                    
+                    break;
+                default:
+                    
+                    break;
             }
         }
         prev_state_ = t.state;
-        // update_ = true;
     }
 }
 
@@ -146,6 +162,9 @@ void MBController::updateScreen()
         {
             case 0:
                 drawMainMenu();
+                break;
+            case 1:
+                drawTempMenu();
                 break;
             default:
                 current_menu_ = 0;
@@ -215,4 +234,11 @@ void MBController::selectAnimation(byte btn)
             delay(30);
             break;
     }
+}
+
+void MBController::drawTempMenu()
+{
+    M5Dial.Display.fillScreen(BLUE);
+    M5Dial.Display.drawPngFile(SPIFFS, "/Temperature_button.png", 0, 0);
+    M5Dial.Display.drawPngFile(SPIFFS, "/Temperature_colorbar.png", 0, 0);
 }

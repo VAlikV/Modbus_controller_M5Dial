@@ -31,16 +31,13 @@ private:
 
     m5::touch_state_t prev_state_;       // Предыдущее состояние сенсора
 
-    // File settings_picture_;
-    // File play_picture_;
-    // File temperature_picture_;
-    // File setup_picture_;
-
     void filesOpen();
 
     void drawCursor();
     void drawMainMenu();
     void selectAnimation(byte btn);
+
+    void drawTempMenu();
 
 public:
 
