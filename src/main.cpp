@@ -4,7 +4,6 @@ MBController MBC = MBController();
 
 void setup()
 {
-
     MBC.setupM5Dial();
 }
 
@@ -12,6 +11,7 @@ void loop()
 {
     MBC.updateM5Dial();
     MBC.updateScreen();
-    //MBC.checkEncoder();
+    MBC.checkEncoder();
     MBC.checkTouch();
+    MBC.checkButton();
 }

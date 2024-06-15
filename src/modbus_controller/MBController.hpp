@@ -14,7 +14,9 @@ private:
 
     M5GFX display_;
 
-    uint16_t color_ = 0b1111101111000000; // Темнооранжевый
+    uint16_t main_color_ = 0b1111101111000000; // Темнооранжевый
+    uint16_t temp_color_ = 0b0000010010011111; // Голубой
+
     bool update_ = true; // Нужно ли обновлять экран
 
     int current_menu_ = 0;      // id текущего меню
@@ -31,13 +33,16 @@ private:
 
     m5::touch_state_t prev_state_;       // Предыдущее состояние сенсора
 
+    byte temperature_ = 10;
+
     void filesOpen();
 
-    void drawCursor();
     void drawMainMenu();
     void selectAnimation(byte btn);
 
     void drawTempMenu();
+    void setTemp(byte inc);
+    void drawCursor();
 
 public:
 
@@ -48,6 +53,7 @@ public:
 
     void checkEncoder();
     void checkTouch();
+    void checkButton();
 
     void updateScreen();
 };
