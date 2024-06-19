@@ -14,4 +14,5 @@ void loop()
     MBC.checkEncoder();
     MBC.checkTouch();
     MBC.checkButton();
+    MBC.sendMessage();
 }

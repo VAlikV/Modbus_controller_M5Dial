@@ -35,7 +35,8 @@ private:
 
     byte temperature_ = 10;
 
-    void filesOpen();
+    bool transmit_ = false;
+    unsigned long last_time_;
 
     void drawMainMenu();
     void selectAnimation(byte btn);
@@ -43,12 +44,17 @@ private:
     void drawTempMenu();
     void setTemp(byte inc);
     void drawCursor();
+    void sendTemperature();
+
+    void drawPlayMenu();
+    void drawBut();
 
 public:
 
     MBController();
 
     void setupM5Dial();
+
     void updateM5Dial();
 
     void checkEncoder();
@@ -56,6 +62,8 @@ public:
     void checkButton();
 
     void updateScreen();
+
+    void sendMessage();
 };
 
 #endif

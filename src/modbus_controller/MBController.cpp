@@ -12,37 +12,16 @@ void MBController::setupM5Dial()
 
     M5Dial.Display.setTextColor(WHITE);
     M5Dial.Display.setTextDatum(middle_center);
-    M5Dial.Display.setTextFont(&fonts::DejaVu12);
-    M5Dial.Display.setTextSize(2);
+    M5Dial.Display.setTextFont(&fonts::DejaVu24);
+    M5Dial.Display.setTextSize(1);
     M5Dial.Display.setBrightness(64);
 
     SPIFFS.begin(true);
 
+    last_time_ = millis();
 }
 
-void MBController::filesOpen()
-{    
-    // settings_picture_ = SPIFFS.open("/Setting.png");
-    // if(!settings_picture_){
-    //     Serial.println("Failed to open file!");
-    //     return;
-    // }
-    // play_picture_ = SPIFFS.open("/Start.png");
-    // if(!play_picture_){
-    //     Serial.println("Failed to open file!");
-    //     return;
-    // }
-    // temperature_picture_ = SPIFFS.open("/Temperature.png");
-    // if(!temperature_picture_){
-    //     Serial.println("Failed to open file!");
-    //     return;
-    // }
-    // setup_picture_ = SPIFFS.open("/Setup.png");
-    // if(!setup_picture_){
-    //     Serial.println("Failed to open file!");
-    //     return;
-    // }
-}
+// -----------------------------------------------------------
 
 void MBController::updateM5Dial()
 {
@@ -108,7 +87,18 @@ void MBController::checkTouch()
                     }
                     break;
                 case 1:
-                    
+                    if (((t.x - M5Dial.Display.width()/2)^2 + (t.y - M5Dial.Display.height()/2)^2 <= 100) && (t.y >= 170))
+                    {
+                        sendTemperature();
+                    }
+                    break;
+                case 2:
+                    if (((t.x - M5Dial.Display.width()/2)^2 + (t.y - M5Dial.Display.height()/2)^2 <= 100) && (t.y >= 170))
+                    {
+                        M5Dial.Speaker.tone(8000, 20);
+                        transmit_ = !transmit_;
+                        drawBut();
+                    }
                     break;
                 default:
                     
@@ -140,6 +130,9 @@ void MBController::updateScreen()
             case 1:
                 drawTempMenu();
                 break;
+            case 2:
+                drawPlayMenu();
+                break;
             default:
                 current_menu_ = 0;
                 break;
@@ -148,6 +141,8 @@ void MBController::updateScreen()
         update_ = false;
     }
 }
+
+// -----------------------------------------------------------
 
 void MBController::drawMainMenu()
 {
@@ -205,6 +200,8 @@ void MBController::selectAnimation(byte btn)
     }
 }
 
+// -----------------------------------------------------------
+
 void MBController::drawTempMenu()
 {
     M5Dial.Display.fillScreen(BLACK);
@@ -233,4 +230,42 @@ void MBController::drawCursor()
     M5Dial.Display.fillCircle(90*cos((168 - 156*temperature_/99)*PI/180) + 120, -90*sin((168 - 156*temperature_/99)*PI/180) + 120, 5, WHITE);
     M5Dial.Display.drawPngFile(SPIFFS, "/Temperature_colorbar.png", 0, 0);
     M5Dial.Display.fillCircle(90*cos((168 - 156*temperature_/99)*PI/180) + 120, -90*sin((168 - 156*temperature_/99)*PI/180) + 120, 5, WHITE);
+}
+
+void MBController::sendTemperature()
+{
+    M5Dial.Speaker.tone(8000, 20);
+    Serial.print("Temperature: ");
+    Serial.println(temperature_);
+}
+
+// -----------------------------------------------------------
+
+void MBController::drawPlayMenu()
+{
+    M5Dial.Display.fillScreen(BLACK);
+    M5Dial.Display.drawString("Send: " + String(temperature_), 120, 77, &fonts::DejaVu24); //FreeSans24pt7b Orbitron_Light_32
+    M5Dial.Display.drawString("Ans: 50", 120, 116, &fonts::DejaVu24); //FreeSans24pt7b Orbitron_Light_32
+    drawBut();
+}
+
+void MBController::drawBut()
+{
+    if (transmit_)
+    {
+        M5Dial.Display.drawPngFile(SPIFFS, "/Play_Stop_button.png", 0, 0);
+    }
+    else
+    {
+        M5Dial.Display.drawPngFile(SPIFFS, "/Play_Send_button.png", 0, 0);
+    }
+}
+
+void MBController::sendMessage()
+{
+    if (transmit_ && (millis() - last_time_ >= 3000))
+    {
+        last_time_ = millis();
+        Serial.println("Message");
+    }
 }
